@@ -34,8 +34,22 @@ func main() {
 	// 判断0是真实存在map中的值还是不存在而返回的零值
 	age, ok := ages["she"]
 	if !ok {
-		fmt.Printf("%d\t%t", age, ok)
+		fmt.Printf("%d\t%t\n", age, ok)
 	}
+
+	//equal使用
+	fmt.Println(equal(map[string]int{"A":0}, map[string]int{"B": 24}))
 }
 
 // 判断两个map是否含有相同的key和value
+func equal(x, y map[string]int) bool {
+	if len(x) != len(y) {
+		return false
+	}
+	for k, xv := range x {
+		if yv, ok := y[k]; !ok || yv != xv { // 使用!ok区分元素不存在和元素存在但为0
+			return false
+		}
+	}
+	return true
+}

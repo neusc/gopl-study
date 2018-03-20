@@ -79,6 +79,7 @@ func nonempty(strings []string) []string  {
 	return strings[:i]
 }
 
+// 移除slice中的第i个元素
 func remove(slice []int, i int) []int  {
 	copy(slice[i:], slice[i+1:])
 	return slice[:len(slice) -1 ]
