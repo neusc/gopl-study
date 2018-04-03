@@ -45,6 +45,8 @@ var depth int
 
 func startElement(n *html.Node) {
 	if n.Type == html.ElementNode {
+		// %*s中的*会在字符串之前添加一些空格
+		// 此处每次会先填充depth*2数量的空格，再输出""，最后再输出HTML标签
 		fmt.Printf("%*s<%s>\n", depth*2, "", n.Data)
 		depth++
 	}
