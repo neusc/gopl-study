@@ -1,24 +1,10 @@
-package main
+package links
 
 import (
-	"os"
 	"fmt"
 	"net/http"
 	"golang.org/x/net/html"
 )
-
-func main() {
-	for _, url := range os.Args[1:] {
-		links, err := Extract(url)
-		if err != nil {
-			fmt.Fprintf(os.Stderr, "findlinks2: %v\n", err)
-			continue
-		}
-		for _, link := range links {
-			fmt.Println(link)
-		}
-	}
-}
 
 // 发起http请求，将回复解析为html，之后返回Html中的链接
 func Extract(url string) ([]string, error) {
