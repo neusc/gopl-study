@@ -9,7 +9,8 @@ import (
 
 // worklist中的每一项调用f
 // f返回的结果依次添加到worklist中
-// 对于worklist的每一项最多调用依次f
+// 对于worklist的每一项最多调用一次f
+// 广度优先算法实现
 func breadthFirst(f func(item string) []string, worklist []string) {
 	seen := make(map[string]bool)
 	for len(worklist) > 0 {
