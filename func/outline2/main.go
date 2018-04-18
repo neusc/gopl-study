@@ -29,6 +29,8 @@ func outline(url string) error {
 	return nil
 }
 
+// 递归遍历Html节点树，打印出页面结构
+// 使用函数栈递归调用实现
 func forEachNode(n *html.Node, pre, post func(n *html.Node)) {
 	if pre != nil {
 		pre(n)
@@ -58,3 +60,16 @@ func endElement(n *html.Node) {
 		fmt.Printf("%*s</%s>\n", depth*2, "", n.Data)
 	}
 }
+
+/*
+<html>
+  <head>
+    <script>
+    </script>
+  </head>
+  <body>
+    <noscript>
+    </noscript>
+  </body>
+</html>
+ */
