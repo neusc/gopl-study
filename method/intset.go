@@ -60,6 +60,7 @@ func (s *IntSet) String() string {
 	return buf.String()
 }
 
+// 求集合元素个数
 func (s *IntSet) Len() int {
 	var count int
 	for _, word := range s.words {
@@ -75,6 +76,14 @@ func (s *IntSet) Len() int {
 	return count
 }
 
+// 从集合删除元素x
+func (s *IntSet) Remove(x int) {
+	word, bit := x/64, uint(x%64)
+	if s.words[word] != 0 && s.words[word]&(1<<bit) != 0 {
+		s.words[word] &^= 1 << bit // 位操作符&^用于按位置零(AND NOT)
+	}
+}
+
 func main() {
 	var x, y IntSet
 	x.Add(1)
@@ -82,6 +91,8 @@ func main() {
 	x.Add(9)
 	fmt.Println(x.String()) // {1 9 144}
 	fmt.Println(x.Len())
+	x.Remove(7)
+	fmt.Println(x.String())
 
 	y.Add(9)
 	y.Add(42)
@@ -91,6 +102,6 @@ func main() {
 	x.UnionWith(&y)
 	fmt.Println(x.String())           // {1 9 42 144}
 	fmt.Println(&x)                   // {1 9 42 144}
-	fmt.Println(x) // {[4398046511618 0 65536]} IntSet类型没有String方法，而*IntSet类型有String方法
+	fmt.Println(x)                    // {[4398046511618 0 65536]} IntSet类型没有String方法，而*IntSet类型有String方法
 	fmt.Println(x.Has(9), x.Has(123)) // true false
 }
