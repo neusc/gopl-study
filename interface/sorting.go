@@ -72,6 +72,30 @@ func main() {
 	fmt.Println("\nbyYear")
 	sort.Sort(byYear(tracks))
 	printTracks(tracks)
+
+	fmt.Println("\nCustom")
+	sort.Sort(customSort{tracks, func(x, y *Track) bool {
+		if x.Title != y.Title {
+			return x.Title < y.Title
+		}
+		if x.Year != y.Year {
+			return x.Year < y.Year
+		}
+		if x.Length != y.Length {
+			return x.Length < y.Length
+		}
+		return false
+	}})
+	printTracks(tracks)
 }
 
+// 实现sort.Interface的具体类型不一定是切片类型，也可以时结构体类型
+// 定义一个多层多字段排序类型
+type customSort struct {
+	t    []*Track
+	less func(x, y *Track) bool
+}
 
+func (x customSort) Len() int           { return len(x.t) }
+func (x customSort) Less(i, j int) bool { return x.less(x.t[i], x.t[j]) }
+func (x customSort) Swap(i, j int)      { x.t[i], x.t[j] = x.t[j], x.t[i] }
