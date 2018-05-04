@@ -12,7 +12,7 @@ func main() {
 	dec := xml.NewDecoder(os.Stdin)
 	var stack []string // 存放结点元素名称的slice
 	for {
-		tok, err := dec.Token()
+		tok, err := dec.Token() //每次调用Token()方法都返回下一个标记
 		if err == io.EOF {
 			break
 		} else if err != nil {
