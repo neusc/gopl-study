@@ -5,6 +5,7 @@ import (
 	"fmt"
 )
 
+// 主函数返回时，所有的goroutine都会被直接打断，然后退出程序
 func main() {
 	go spinner(100 * time.Millisecond)
 	const n = 45
