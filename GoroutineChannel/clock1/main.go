@@ -20,7 +20,7 @@ func main() {
 			log.Print(err)
 			continue
 		}
-		handleConn(conn)
+		go handleConn(conn) // go关键字使handleConn的调用都进入一个独立的goroutine，实现支持并发
 	}
 }
 
