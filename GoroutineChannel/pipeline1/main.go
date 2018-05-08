@@ -16,11 +16,7 @@ func main() {
 
 	// 接收naturals channel传来的整数并求平方，将结果传入squares channel
 	go func() {
-		for {
-			x, ok := <-naturals
-			if !ok {
-				break // 退出循环当无法从channel获取到值，即channel已经关闭
-			}
+		for x := range naturals {
 			squares <- x * x
 		}
 		close(squares)
