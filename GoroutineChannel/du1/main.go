@@ -11,7 +11,7 @@ import (
 func main() {
 	// 初始化目录为当前目录
 	flag.Parse()
-	roots := flag.Args()
+	roots := flag.Args() // 解析通过命令行参数传入的参数
 	if len(roots) == 0 {
 		roots = []string{"."}
 	}
