@@ -71,6 +71,10 @@ loop:
 	printDiskUsage(nfiles, nbytes)
 }
 
+
+// 取消是需要一定代价的
+// 但此处对取消状态进行轮询可以带来明显的好处
+// 可以避免在取消操作发生后继续创建goroutine
 func walkDir(dir string, n *sync.WaitGroup, fileSizes chan<- int64) {
 	defer n.Done() // 结束一个walkDir的调用计数器减1
 	if cancelled() {
