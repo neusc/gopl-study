@@ -42,7 +42,7 @@ func handleConn(conn net.Conn) {
 	who := conn.RemoteAddr().String() // 根据客户端的ip地址区别用户
 	// 新建连接的相关操作
 	ch <- "You are " + who
-	messages <- who + " has arrived"
+	messages <- who + " has arrived" // 注意此处两个channel的调用顺序，只有其它的客户端才能接受到'arrivied'的广播信息
 	entering <- ch
 
 	input := bufio.NewScanner(conn)
