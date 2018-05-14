@@ -15,6 +15,8 @@ var (
 	messages = make(chan string)
 )
 
+// 广播服务
+// 实现所有客户端的连接和断开操作，以及向所有连接客户端广播文本信息
 func broadcaster() {
 	clients := make(map[client]bool) // 所有已连接到服务器的客户端
 	for {
