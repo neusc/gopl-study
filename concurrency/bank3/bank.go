@@ -15,6 +15,6 @@ func Deposit(amount int) {
 
 func Balance() int {
 	mu.Lock()
-	defer mu.Unlock()
+	defer mu.Unlock() // 即使发生panic，defer语句依然可以执行
 	return balance
 }
