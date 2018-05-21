@@ -35,7 +35,7 @@ func (memo *Memo) Get(key string) (interface{}, error) {
 		memo.mu.Unlock()
 
 		e.res.value, e.res.err = memo.f(key)
-		close(e.ready)
+		close(e.ready) // 向其它goroutine广播该条目的值已经设置成功
 	} else {
 		// 对某个url的重复请求
 		memo.mu.Unlock()
@@ -43,6 +43,6 @@ func (memo *Memo) Get(key string) (interface{}, error) {
 		// 在channel关闭之前此处一直阻塞
 		<-e.ready
 	}
-
+	// e由于是一个指针，所有可以在多个goroutine中共享
 	return e.res.value, e.res.err // 不需要再次执行函数，直接返回缓存的结果
 }
