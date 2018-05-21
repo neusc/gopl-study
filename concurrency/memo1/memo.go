@@ -21,7 +21,7 @@ func (memo *Memo) Get(key string) (interface{}, error) {
 	res, ok := memo.cache[key]
 	if !ok {
 		res.value, res.err = memo.f(key) // 将函数结果缓存
-		memo.cache[key] = res
+		memo.cache[key] = res // 此处存在数据竞争
 	}
 	return res.value, res.err // 不需要再次执行函数，直接返回缓存的结果
 }

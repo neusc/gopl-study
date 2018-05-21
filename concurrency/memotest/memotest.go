@@ -29,6 +29,10 @@ func incomingURLs() <-chan string {
 			"https://sina.com.cn",
 			"https://bj.jumei.com",
 			"http://chuans.online",
+			"https://sina.com.cn",
+			"http://chuans.online",
+			"https://baidu.com",
+			"https://bj.jumei.com",
 		} {
 			ch <- url
 		}
