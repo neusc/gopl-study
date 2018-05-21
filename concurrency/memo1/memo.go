@@ -23,10 +23,13 @@ func New(f Func) *Memo {
 func (memo *Memo) Get(key string) (interface{}, error) {
 	memo.mu.Lock()
 	res, ok := memo.cache[key]
+	memo.mu.Unlock()
 	if !ok {
 		res.value, res.err = memo.f(key) // 将函数结果缓存
-		memo.cache[key] = res // 此处存在数据竞争
+		// 在两个临界区之间，多个goroutine可以并发的执行函数获取结果
+		memo.mu.Lock()
+		memo.cache[key] = res
+		memo.mu.Unlock()
 	}
-	memo.mu.Unlock()
 	return res.value, res.err // 不需要再次执行函数，直接返回缓存的结果
 }
