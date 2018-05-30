@@ -29,3 +29,10 @@ func TestIsPalindrome(t *testing.T) {
 		}
 	}
 }
+
+// 基准测试
+func BenchmarkIsPalindrome(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		IsPalindrome("A man, a plan, a canal: Panana")
+	}
+}
