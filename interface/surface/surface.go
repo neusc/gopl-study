@@ -111,7 +111,7 @@ func main() {
 	现在，为了使用DefaultServeMux作为服务器的主handler，我们不需要将它传给ListenAndServe函数；nil值就可以工作
 	 */
 	http.HandleFunc("/plot", plot)
-	log.Fatal(http.ListenAndServe("localhost:8000", nil))
+	log.Fatal(http.ListenAndServe(":8000", nil)) // 监听本机端口不必写localhost，直接指定端口号即可
 }
 
 //!-main
