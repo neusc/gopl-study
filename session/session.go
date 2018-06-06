@@ -93,6 +93,7 @@ func (manager *Manager) GC() {
 	manager.lock.Lock()
 	defer manager.lock.Unlock()
 	manager.provider.SessionGC(manager.maxlifetime)
+	// 当超时maxLifeTime之后调用GC函数，这样就可以保证maxLifeTime时间内的session都是可用的
 	time.AfterFunc(time.Duration(manager.maxlifetime), func() { manager.GC() })
 }
 
