@@ -100,7 +100,7 @@ func (pder *Provider) SessionGC(maxlifetime int64) {
 
 func (pder *Provider) SessionUpdate(sid string) error {
 	pder.lock.Lock()
-	defer pder.lock.Lock()
+	defer pder.lock.Unlock()
 	if element, ok := pder.sessions[sid]; ok {
 		element.Value.(*SessionStore).timeAccessed = time.Now() // 更新session的最后访问时间
 		pder.list.MoveToFront(element)                          // 将此session对象放到链表的最前端
