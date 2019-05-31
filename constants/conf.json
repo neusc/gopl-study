@@ -1,0 +1,5 @@
+{
+  "staticPort": ":8088",
+  "uploadPort": ":8089",
+  "staticPath": "/root/golang/static/"
+}
