@@ -28,7 +28,7 @@
         oData.append('CustomField', 'this is extra data')
 
         var oReq = new XMLHttpRequest()
-        oReq.open('post', 'http://chuans.online:8089/upload', true)
+        oReq.open('post', 'http://chuans.online:8089', true)
         oReq.onload = function (oEvent) {
             if (oReq.status === 200) {
                 oOutput.innerHTML = 'Uploaded!'

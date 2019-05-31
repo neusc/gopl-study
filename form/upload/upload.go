@@ -28,7 +28,7 @@ func main() {
 	if err != nil {
 		fmt.Println("err", err)
 	}
-	http.HandleFunc("/upload", upload)
+	http.HandleFunc("/", upload)
 	log.Fatal(http.ListenAndServe(conf.UploadPort, nil))
 }
 
