@@ -1,9 +1,9 @@
 package main
 
 import (
-	"net/http"
 	"fmt"
 	"log"
+	"net/http"
 )
 
 type dollars float32
@@ -51,4 +51,4 @@ type HandlerFunc func(w ResponseWriter, r *Request)
 func (f HandlerFunc) ServeHTTP(w ResponseWriter, r *Request) {
     f(w, r)
 }
- */
+*/
