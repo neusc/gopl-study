@@ -10,21 +10,21 @@ import (
 	"os"
 )
 
-type staticConfiguration struct {
-	StaticPort string
-	StaticPath string
+type StaticConfiguration struct {
+	StaticServicePort string
+	StaticPath        string
 }
 
 func main() {
 	file, _ := os.Open("../constants/conf.json")
 	defer file.Close()
 	decoder := json.NewDecoder(file)
-	conf := staticConfiguration{}
+	conf := StaticConfiguration{}
 	decodeErr := decoder.Decode(&conf)
 	if decodeErr != nil {
 		fmt.Println("Error", decodeErr)
 	}
-	log.Printf("listening on %s...", conf.StaticPort)
-	err := http.ListenAndServe(conf.StaticPort, http.FileServer(http.Dir(conf.StaticPath)))
+	log.Printf("listening on %s...", conf.StaticServicePort)
+	err := http.ListenAndServe(conf.StaticServicePort, http.FileServer(http.Dir(conf.StaticPath)))
 	log.Fatalln(err)
 }

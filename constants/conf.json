@@ -1,5 +1,6 @@
 {
-  "staticPort": ":8088",
-  "uploadPort": ":8089",
-  "staticPath": "/root/golang/static/"
+  "staticServicePort": ":8088",
+  "staticPort": ":8089",
+  "staticPath": "/root/golang/static/",
+  "filePath": "http://www.chuans.online/static/"
 }
